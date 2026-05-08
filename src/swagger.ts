@@ -6,13 +6,27 @@ export const swaggerSpec = swaggerJSDoc({
     info: {
       title: "Ecommerce API",
       version: "1.0.0",
-      description: "Full Ecommerce Backend API (Users, Auth, Products, Categories, Orders)"
+      description: "Full Ecommerce Backend API",
     },
-    servers: [
+
+    // 🔐 THIS IS WHAT CONTROLS "Authorize"
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+
+    // 🔐 APPLY GLOBAL SECURITY (IMPORTANT)
+    security: [
       {
-        url: "http://localhost:5001"
-      }
-    ]
+        bearerAuth: [],
+      },
+    ],
   },
-  apis: ["./src/routes/*.ts"]
+
+  apis: ["./src/routes/*.ts"],
 });
