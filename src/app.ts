@@ -12,8 +12,17 @@ import categoryRoutes from "./routes/categoryRoutes";
 // 📦 PRODUCTS
 import productRoutes from "./routes/productRoutes";
 
+// 🛒 CART
+import cartRoutes from "./routes/cartRoutes";
+
+// 💳 CHECKOUT (NEW ADDITION)
+import checkoutRoutes from "./routes/checkoutRoutes";
+
 // 🟣 ORDERS
 import orderRoutes from "./routes/orderRoutes";
+
+// 🔐 AUTH
+import authRoutes from "./routes/authRoutes";
 
 // 📘 SWAGGER
 import swaggerUi from "swagger-ui-express";
@@ -28,10 +37,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 3️⃣ ROUTES
+// 3️⃣ ROUTES (CLEAN ORDER)
+app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/products", productRoutes);
+
+// 🛒 CART
+app.use("/cart", cartRoutes);
+
+// 💳 CHECKOUT
+app.use("/checkout", checkoutRoutes);
+
+// 🟣 ORDERS
 app.use("/orders", orderRoutes);
 
 // 4️⃣ SWAGGER DOCS

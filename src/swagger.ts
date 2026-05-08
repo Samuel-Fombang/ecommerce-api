@@ -6,7 +6,13 @@ export const swaggerSpec = swaggerJSDoc({
     info: {
       title: "Ecommerce API",
       version: "1.0.0",
+      description: "Full Ecommerce Backend API (Users, Auth, Products, Categories, Orders)"
     },
+    servers: [
+      {
+        url: "http://localhost:5001"
+      }
+    ]
   },
-  apis: [],
+  apis: ["./src/routes/*.ts"]
 });

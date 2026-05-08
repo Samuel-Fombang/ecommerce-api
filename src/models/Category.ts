@@ -2,25 +2,21 @@ import mongoose from "mongoose";
 
 const categorySchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+    name: { type: String, required: true }
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-// clean output (like users)
+// ✅ SAFE SERIALIZATION
 categorySchema.set("toJSON", {
-  transform: function (doc, ret) {
-    ret.id = ret._id;
-    delete ret._id;
-    delete ret.__v;
-    return ret;
-  },
+  transform: function (_doc, ret) {
+    return {
+      id: ret._id,
+      name: ret.name,
+      createdAt: ret.createdAt,
+      updatedAt: ret.updatedAt
+    };
+  }
 });
 
 export const Category = mongoose.model("Category", categorySchema);

@@ -1,5 +1,15 @@
 import mongoose from "mongoose";
 
+const orderItemSchema = new mongoose.Schema({
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
+  quantity: Number,
+  price: Number,
+});
+
 const orderSchema = new mongoose.Schema(
   {
     userId: {
@@ -8,38 +18,19 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
 
-    products: [
-      {
-        productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
+    items: [orderItemSchema],
 
     total: {
       type: Number,
       required: true,
     },
-  },
-  {
-    timestamps: true,
-  }
-);
 
-// ✅ Clean response (remove _id, __v)
-orderSchema.set("toJSON", {
-  transform: function (doc, ret) {
-    ret.id = ret._id;
-    delete ret._id;
-    delete ret.__v;
-    return ret;
+    status: {
+      type: String,
+      default: "pending",
+    },
   },
-});
+  { timestamps: true }
+);
 
 export const Order = mongoose.model("Order", orderSchema);
