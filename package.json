@@ -1,6 +1,7 @@
 {
   "name": "ecommerce-api",
   "version": "1.0.0",
+  "description": "Full Ecommerce Backend API",
   "main": "dist/app.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
